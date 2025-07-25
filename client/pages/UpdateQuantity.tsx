@@ -77,7 +77,7 @@ export default function UpdateQuantity() {
       const item = mockInventory.find(item => item.id === parseInt(itemId));
       if (item) {
         setSelectedItem(item);
-        setNewQuantity(item.quantity.toString());
+        setNewQuantity(item.qnt.toString());
       }
     }
   }, [itemId]);

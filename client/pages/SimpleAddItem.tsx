@@ -3,14 +3,19 @@ import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
+import { Textarea } from '@/components/ui/textarea';
 import { Alert, AlertDescription } from '@/components/ui/alert';
-import { ArrowLeft, Plus, CheckCircle } from 'lucide-react';
+import { ArrowLeft, Plus, CheckCircle, Upload, X } from 'lucide-react';
 import { Link } from 'react-router-dom';
 
 export default function SimpleAddItem() {
   const [formData, setFormData] = useState({
     name: '',
-    quantity: '',
+    type: '',
+    sku: '',
+    image: '',
+    desc: '',
+    qnt: '',
     price: ''
   });
   const [errors, setErrors] = useState<Record<string, string>>({});
@@ -31,8 +36,16 @@ export default function SimpleAddItem() {
       newErrors.name = 'Item name is required';
     }
     
-    if (!formData.quantity || parseInt(formData.quantity) < 0) {
-      newErrors.quantity = 'Valid quantity is required';
+    if (!formData.type.trim()) {
+      newErrors.type = 'Item type is required';
+    }
+    
+    if (!formData.sku.trim()) {
+      newErrors.sku = 'SKU is required';
+    }
+    
+    if (!formData.qnt || parseInt(formData.qnt) < 0) {
+      newErrors.qnt = 'Valid quantity is required';
     }
     
     if (!formData.price || parseFloat(formData.price) < 0) {
@@ -58,7 +71,7 @@ export default function SimpleAddItem() {
       
       // Reset form after success
       setTimeout(() => {
-        setFormData({ name: '', quantity: '', price: '' });
+        setFormData({ name: '', type: '', sku: '', image: '', desc: '', qnt: '', price: '' });
         setIsSuccess(false);
       }, 2000);
     }, 1000);
@@ -107,68 +120,146 @@ export default function SimpleAddItem() {
       </header>
 
       {/* Main Content */}
-      <main className="max-w-2xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+      <main className="max-w-3xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
         <Card>
           <CardHeader>
             <CardTitle className="text-2xl text-center">Add New Item to Inventory</CardTitle>
             <p className="text-center text-gray-600">
-              Fill in the basic information for your new item
+              Fill in all the information for your new item
             </p>
           </CardHeader>
           <CardContent>
             <form onSubmit={handleSubmit} className="space-y-6">
-              {/* Item Name */}
-              <div className="space-y-2">
-                <Label htmlFor="name" className="text-lg">Item Name *</Label>
-                <Input
-                  id="name"
-                  value={formData.name}
-                  onChange={(e) => handleInputChange('name', e.target.value)}
-                  placeholder="Enter item name (e.g., MacBook Pro, iPhone 15)"
-                  className={`text-lg py-3 ${errors.name ? 'border-red-500' : ''}`}
-                  disabled={isSubmitting}
-                />
-                {errors.name && (
-                  <p className="text-sm text-red-500">{errors.name}</p>
-                )}
+              {/* Basic Information */}
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+                {/* Item Name */}
+                <div className="space-y-2">
+                  <Label htmlFor="name" className="text-base font-medium">Item Name *</Label>
+                  <Input
+                    id="name"
+                    value={formData.name}
+                    onChange={(e) => handleInputChange('name', e.target.value)}
+                    placeholder="Enter item name"
+                    className={`${errors.name ? 'border-red-500' : ''}`}
+                    disabled={isSubmitting}
+                  />
+                  {errors.name && (
+                    <p className="text-sm text-red-500">{errors.name}</p>
+                  )}
+                </div>
+
+                {/* Item Type */}
+                <div className="space-y-2">
+                  <Label htmlFor="type" className="text-base font-medium">Type *</Label>
+                  <Input
+                    id="type"
+                    value={formData.type}
+                    onChange={(e) => handleInputChange('type', e.target.value)}
+                    placeholder="e.g., Electronics, Clothing, Books"
+                    className={`${errors.type ? 'border-red-500' : ''}`}
+                    disabled={isSubmitting}
+                  />
+                  {errors.type && (
+                    <p className="text-sm text-red-500">{errors.type}</p>
+                  )}
+                </div>
+
+                {/* SKU */}
+                <div className="space-y-2">
+                  <Label htmlFor="sku" className="text-base font-medium">SKU *</Label>
+                  <Input
+                    id="sku"
+                    value={formData.sku}
+                    onChange={(e) => handleInputChange('sku', e.target.value)}
+                    placeholder="Enter unique SKU code"
+                    className={`${errors.sku ? 'border-red-500' : ''}`}
+                    disabled={isSubmitting}
+                  />
+                  {errors.sku && (
+                    <p className="text-sm text-red-500">{errors.sku}</p>
+                  )}
+                </div>
+
+                {/* Image URL */}
+                <div className="space-y-2">
+                  <Label htmlFor="image" className="text-base font-medium">Image URL</Label>
+                  <Input
+                    id="image"
+                    value={formData.image}
+                    onChange={(e) => handleInputChange('image', e.target.value)}
+                    placeholder="Enter image URL (optional)"
+                    disabled={isSubmitting}
+                  />
+                </div>
+
+                {/* Quantity */}
+                <div className="space-y-2">
+                  <Label htmlFor="qnt" className="text-base font-medium">Quantity *</Label>
+                  <Input
+                    id="qnt"
+                    type="number"
+                    min="0"
+                    value={formData.qnt}
+                    onChange={(e) => handleInputChange('qnt', e.target.value)}
+                    placeholder="Enter quantity"
+                    className={`${errors.qnt ? 'border-red-500' : ''}`}
+                    disabled={isSubmitting}
+                  />
+                  {errors.qnt && (
+                    <p className="text-sm text-red-500">{errors.qnt}</p>
+                  )}
+                </div>
+
+                {/* Price */}
+                <div className="space-y-2">
+                  <Label htmlFor="price" className="text-base font-medium">Price ($) *</Label>
+                  <Input
+                    id="price"
+                    type="number"
+                    min="0"
+                    step="0.01"
+                    value={formData.price}
+                    onChange={(e) => handleInputChange('price', e.target.value)}
+                    placeholder="Enter price"
+                    className={`${errors.price ? 'border-red-500' : ''}`}
+                    disabled={isSubmitting}
+                  />
+                  {errors.price && (
+                    <p className="text-sm text-red-500">{errors.price}</p>
+                  )}
+                </div>
               </div>
 
-              {/* Quantity */}
+              {/* Description */}
               <div className="space-y-2">
-                <Label htmlFor="quantity" className="text-lg">Quantity *</Label>
-                <Input
-                  id="quantity"
-                  type="number"
-                  min="0"
-                  value={formData.quantity}
-                  onChange={(e) => handleInputChange('quantity', e.target.value)}
-                  placeholder="Enter quantity (e.g., 10)"
-                  className={`text-lg py-3 ${errors.quantity ? 'border-red-500' : ''}`}
+                <Label htmlFor="desc" className="text-base font-medium">Description</Label>
+                <Textarea
+                  id="desc"
+                  value={formData.desc}
+                  onChange={(e) => handleInputChange('desc', e.target.value)}
+                  placeholder="Enter item description (optional)"
+                  rows={3}
                   disabled={isSubmitting}
                 />
-                {errors.quantity && (
-                  <p className="text-sm text-red-500">{errors.quantity}</p>
-                )}
               </div>
 
-              {/* Price */}
-              <div className="space-y-2">
-                <Label htmlFor="price" className="text-lg">Price ($) *</Label>
-                <Input
-                  id="price"
-                  type="number"
-                  min="0"
-                  step="0.01"
-                  value={formData.price}
-                  onChange={(e) => handleInputChange('price', e.target.value)}
-                  placeholder="Enter price (e.g., 999.99)"
-                  className={`text-lg py-3 ${errors.price ? 'border-red-500' : ''}`}
-                  disabled={isSubmitting}
-                />
-                {errors.price && (
-                  <p className="text-sm text-red-500">{errors.price}</p>
-                )}
-              </div>
+              {/* Image Preview */}
+              {formData.image && (
+                <div className="space-y-2">
+                  <Label className="text-base font-medium">Image Preview</Label>
+                  <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
+                    <img
+                      src={formData.image}
+                      alt="Item preview"
+                      className="w-32 h-32 object-cover rounded-lg mx-auto"
+                      onError={(e) => {
+                        const target = e.target as HTMLImageElement;
+                        target.style.display = 'none';
+                      }}
+                    />
+                  </div>
+                </div>
+              )}
 
               {/* Error Display */}
               {Object.keys(errors).length > 0 && (
@@ -180,15 +271,22 @@ export default function SimpleAddItem() {
               )}
 
               {/* Preview */}
-              {formData.name && formData.quantity && formData.price && (
+              {formData.name && formData.type && formData.sku && formData.qnt && formData.price && (
                 <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
-                  <h4 className="font-medium text-blue-900 mb-2">Preview:</h4>
-                  <div className="text-sm text-blue-800">
-                    <p><strong>Item:</strong> {formData.name}</p>
-                    <p><strong>Quantity:</strong> {formData.quantity}</p>
-                    <p><strong>Price:</strong> ${formData.price}</p>
-                    <p><strong>Total Value:</strong> ${(parseFloat(formData.price) * parseInt(formData.quantity)).toFixed(2)}</p>
+                  <h4 className="font-medium text-blue-900 mb-3">Item Preview:</h4>
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm text-blue-800">
+                    <div><strong>Name:</strong> {formData.name}</div>
+                    <div><strong>Type:</strong> {formData.type}</div>
+                    <div><strong>SKU:</strong> {formData.sku}</div>
+                    <div><strong>Quantity:</strong> {formData.qnt}</div>
+                    <div><strong>Price:</strong> ${formData.price}</div>
+                    <div><strong>Total Value:</strong> ${(parseFloat(formData.price) * parseInt(formData.qnt)).toFixed(2)}</div>
                   </div>
+                  {formData.desc && (
+                    <div className="mt-3 text-sm text-blue-800">
+                      <strong>Description:</strong> {formData.desc}
+                    </div>
+                  )}
                 </div>
               )}
 

@@ -178,7 +178,7 @@ export default function UpdateQuantity() {
                   >
                     <div>
                       <h3 className="font-medium">{item.name}</h3>
-                      <p className="text-gray-600">Current quantity: {item.quantity}</p>
+                      <p className="text-gray-600">Current quantity: {item.qnt}</p>
                     </div>
                     <Badge variant="outline">Select</Badge>
                   </div>

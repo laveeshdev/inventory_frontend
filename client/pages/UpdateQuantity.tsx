@@ -111,9 +111,9 @@ export default function UpdateQuantity() {
     const quantity = parseInt(newQuantity) || 0;
     switch (updateType) {
       case 'add':
-        return selectedItem.quantity + quantity;
+        return selectedItem.qnt + quantity;
       case 'subtract':
-        return Math.max(0, selectedItem.quantity - quantity);
+        return Math.max(0, selectedItem.qnt - quantity);
       default:
         return quantity;
     }

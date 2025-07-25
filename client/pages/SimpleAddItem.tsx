@@ -88,6 +88,7 @@ export default function SimpleAddItem() {
       // Reset form after success
       setTimeout(() => {
         setFormData({ name: '', type: '', sku: '', image: '', desc: '', qnt: '', price: '' });
+        setSelectedFile(null);
         setIsSuccess(false);
       }, 2000);
     }, 1000);

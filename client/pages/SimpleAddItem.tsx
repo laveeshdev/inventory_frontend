@@ -31,6 +31,20 @@ export default function SimpleAddItem() {
     }
   };
 
+  const handleFileSelect = (file: File | null) => {
+    setSelectedFile(file);
+    if (file) {
+      const reader = new FileReader();
+      reader.onload = (e) => {
+        const result = e.target?.result as string;
+        setFormData(prev => ({ ...prev, image: result }));
+      };
+      reader.readAsDataURL(file);
+    } else {
+      setFormData(prev => ({ ...prev, image: '' }));
+    }
+  };
+
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
     

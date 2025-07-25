@@ -7,11 +7,56 @@ import { Link } from 'react-router-dom';
 
 // Mock data for simple inventory
 const mockInventory = [
-  { id: 1, name: 'MacBook Pro 16"', quantity: 5, price: 2499.99 },
-  { id: 2, name: 'iPhone 15 Pro', quantity: 12, price: 999.99 },
-  { id: 3, name: 'Wireless Mouse', quantity: 25, price: 79.99 },
-  { id: 4, name: 'USB-C Cable', quantity: 50, price: 29.99 },
-  { id: 5, name: 'Dell Monitor 27"', quantity: 8, price: 299.99 },
+  {
+    id: 1,
+    name: 'MacBook Pro 16"',
+    type: 'Electronics',
+    sku: 'APPLE-MBP16-001',
+    image: 'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=200&h=200&fit=crop',
+    desc: 'High-performance laptop with M3 chip',
+    qnt: 5,
+    price: 2499.99
+  },
+  {
+    id: 2,
+    name: 'iPhone 15 Pro',
+    type: 'Electronics',
+    sku: 'APPLE-IP15-PRO',
+    image: 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=200&h=200&fit=crop',
+    desc: 'Latest iPhone with Pro camera system',
+    qnt: 12,
+    price: 999.99
+  },
+  {
+    id: 3,
+    name: 'Wireless Mouse',
+    type: 'Accessories',
+    sku: 'LOGI-WM-001',
+    image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=200&h=200&fit=crop',
+    desc: 'Ergonomic wireless mouse with precision tracking',
+    qnt: 25,
+    price: 79.99
+  },
+  {
+    id: 4,
+    name: 'USB-C Cable',
+    type: 'Cables',
+    sku: 'CABLE-USBC-002',
+    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop',
+    desc: 'High-speed USB-C charging and data cable',
+    qnt: 50,
+    price: 29.99
+  },
+  {
+    id: 5,
+    name: 'Dell Monitor 27"',
+    type: 'Electronics',
+    sku: 'DELL-MON27-001',
+    image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=200&h=200&fit=crop',
+    desc: '4K monitor with excellent color accuracy',
+    qnt: 8,
+    price: 299.99
+  },
 ];
 
 export default function SimpleInventory() {

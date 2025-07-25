@@ -140,20 +140,32 @@ export function FileUpload({ onFileSelect, currentImage, className, compact = fa
           )}
         </div>
       ) : (
-        <div className="border border-gray-200 rounded-lg p-4 bg-white">
-          <div className="flex items-start gap-4">
+        <div className={cn(
+          "border border-gray-200 rounded-lg bg-white",
+          compact ? "p-3" : "p-4"
+        )}>
+          <div className="flex items-start gap-3">
             <div className="flex-shrink-0">
               <img
                 src={preview}
                 alt="Preview"
-                className="w-24 h-24 object-cover rounded-lg border"
+                className={cn(
+                  "object-cover rounded-lg border",
+                  compact ? "w-16 h-16" : "w-24 h-24"
+                )}
               />
             </div>
             <div className="flex-1 min-w-0">
-              <h4 className="text-sm font-medium text-gray-900 mb-2">
+              <h4 className={cn(
+                "font-medium text-gray-900",
+                compact ? "text-sm mb-1" : "text-sm mb-2"
+              )}>
                 Image Selected
               </h4>
-              <p className="text-xs text-gray-500 mb-3">
+              <p className={cn(
+                "text-xs text-gray-500",
+                compact ? "mb-2" : "mb-3"
+              )}>
                 Ready to upload
               </p>
               <div className="flex gap-2">

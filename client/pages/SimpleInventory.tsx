@@ -125,34 +125,59 @@ export default function SimpleInventory() {
             filteredItems.map((item) => (
               <Card key={item.id} className="hover:shadow-md transition-shadow">
                 <CardContent className="p-6">
-                  <div className="flex justify-between items-center">
+                  <div className="flex gap-4">
+                    {/* Item Image */}
+                    <div className="flex-shrink-0">
+                      <img
+                        src={item.image}
+                        alt={item.name}
+                        className="w-20 h-20 object-cover rounded-lg border"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = 'https://images.unsplash.com/photo-1580169980114-ccd0babfa840?w=200&h=200&fit=crop';
+                        }}
+                      />
+                    </div>
+
+                    {/* Item Details */}
                     <div className="flex-1">
-                      <h3 className="text-xl font-semibold text-gray-900 mb-2">
-                        {item.name}
-                      </h3>
-                      <div className="flex items-center gap-6 text-gray-600">
+                      <div className="flex justify-between items-start mb-3">
                         <div>
-                          <span className="text-sm">Quantity: </span>
-                          <span className="font-medium text-lg">{item.quantity}</span>
+                          <h3 className="text-xl font-semibold text-gray-900">
+                            {item.name}
+                          </h3>
+                          <div className="flex items-center gap-4 text-sm text-gray-600 mt-1">
+                            <span><strong>Type:</strong> {item.type}</span>
+                            <span><strong>SKU:</strong> {item.sku}</span>
+                          </div>
+                        </div>
+                        <Button variant="outline" asChild>
+                          <Link to={`/update-quantity?item=${item.id}`}>
+                            Update Quantity
+                          </Link>
+                        </Button>
+                      </div>
+
+                      {item.desc && (
+                        <p className="text-gray-600 text-sm mb-3">{item.desc}</p>
+                      )}
+
+                      <div className="grid grid-cols-3 gap-4 text-center bg-gray-50 rounded-lg p-3">
+                        <div>
+                          <div className="font-medium text-lg">{item.qnt}</div>
+                          <div className="text-sm text-gray-600">Quantity</div>
                         </div>
                         <div>
-                          <span className="text-sm">Price: </span>
-                          <span className="font-medium text-lg">${item.price}</span>
+                          <div className="font-medium text-lg">${item.price}</div>
+                          <div className="text-sm text-gray-600">Price</div>
                         </div>
                         <div>
-                          <span className="text-sm">Total Value: </span>
-                          <span className="font-medium text-lg text-green-600">
-                            ${(item.quantity * item.price).toFixed(2)}
-                          </span>
+                          <div className="font-medium text-lg text-green-600">
+                            ${(item.qnt * item.price).toFixed(2)}
+                          </div>
+                          <div className="text-sm text-gray-600">Total Value</div>
                         </div>
                       </div>
-                    </div>
-                    <div className="flex gap-2">
-                      <Button variant="outline" asChild>
-                        <Link to={`/update-quantity?item=${item.id}`}>
-                          Update Quantity
-                        </Link>
-                      </Button>
                     </div>
                   </div>
                 </CardContent>

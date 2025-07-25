@@ -197,15 +197,12 @@ export default function SimpleAddItem() {
                   )}
                 </div>
 
-                {/* Image URL */}
-                <div className="space-y-2">
-                  <Label htmlFor="image" className="text-base font-medium">Image URL</Label>
-                  <Input
-                    id="image"
-                    value={formData.image}
-                    onChange={(e) => handleInputChange('image', e.target.value)}
-                    placeholder="Enter image URL (optional)"
-                    disabled={isSubmitting}
+                {/* File Upload */}
+                <div className="md:col-span-2 space-y-2">
+                  <Label className="text-base font-medium">Item Image</Label>
+                  <FileUpload
+                    onFileSelect={handleFileSelect}
+                    currentImage={formData.image}
                   />
                 </div>
 

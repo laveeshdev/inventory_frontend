@@ -92,7 +92,7 @@ export default function UpdateQuantity() {
       return;
     }
 
-    if (updateType === 'subtract' && quantity > selectedItem.quantity) {
+    if (updateType === 'subtract' && quantity > selectedItem.qnt) {
       setError('Cannot subtract more than current quantity');
       return;
     }

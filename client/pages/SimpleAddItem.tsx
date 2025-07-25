@@ -257,23 +257,7 @@ export default function SimpleAddItem() {
                 />
               </div>
 
-              {/* Image Preview */}
-              {formData.image && (
-                <div className="space-y-2">
-                  <Label className="text-base font-medium">Image Preview</Label>
-                  <div className="border border-gray-200 rounded-lg p-4 bg-gray-50">
-                    <img
-                      src={formData.image}
-                      alt="Item preview"
-                      className="w-32 h-32 object-cover rounded-lg mx-auto"
-                      onError={(e) => {
-                        const target = e.target as HTMLImageElement;
-                        target.style.display = 'none';
-                      }}
-                    />
-                  </div>
-                </div>
-              )}
+
 
               {/* Error Display */}
               {Object.keys(errors).length > 0 && (

@@ -1,80 +1,87 @@
-import { useState, useEffect } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { Label } from '@/components/ui/label';
-import { Badge } from '@/components/ui/badge';
-import { Alert, AlertDescription } from '@/components/ui/alert';
-import { ArrowLeft, Edit, CheckCircle, Package } from 'lucide-react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { useState, useEffect } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { Label } from "@/components/ui/label";
+import { Badge } from "@/components/ui/badge";
+import { Alert, AlertDescription } from "@/components/ui/alert";
+import { ArrowLeft, Edit, CheckCircle, Package } from "lucide-react";
+import { Link, useSearchParams } from "react-router-dom";
 
 // Mock data - same as inventory
 const mockInventory = [
   {
     id: 1,
     name: 'MacBook Pro 16"',
-    type: 'Electronics',
-    sku: 'APPLE-MBP16-001',
-    image: 'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=200&h=200&fit=crop',
-    desc: 'High-performance laptop with M3 chip',
+    type: "Electronics",
+    sku: "APPLE-MBP16-001",
+    image:
+      "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=200&h=200&fit=crop",
+    desc: "High-performance laptop with M3 chip",
     qnt: 5,
-    price: 2499.99
+    price: 2499.99,
   },
   {
     id: 2,
-    name: 'iPhone 15 Pro',
-    type: 'Electronics',
-    sku: 'APPLE-IP15-PRO',
-    image: 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=200&h=200&fit=crop',
-    desc: 'Latest iPhone with Pro camera system',
+    name: "iPhone 15 Pro",
+    type: "Electronics",
+    sku: "APPLE-IP15-PRO",
+    image:
+      "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=200&h=200&fit=crop",
+    desc: "Latest iPhone with Pro camera system",
     qnt: 12,
-    price: 999.99
+    price: 999.99,
   },
   {
     id: 3,
-    name: 'Wireless Mouse',
-    type: 'Accessories',
-    sku: 'LOGI-WM-001',
-    image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=200&h=200&fit=crop',
-    desc: 'Ergonomic wireless mouse with precision tracking',
+    name: "Wireless Mouse",
+    type: "Accessories",
+    sku: "LOGI-WM-001",
+    image:
+      "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=200&h=200&fit=crop",
+    desc: "Ergonomic wireless mouse with precision tracking",
     qnt: 25,
-    price: 79.99
+    price: 79.99,
   },
   {
     id: 4,
-    name: 'USB-C Cable',
-    type: 'Cables',
-    sku: 'CABLE-USBC-002',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop',
-    desc: 'High-speed USB-C charging and data cable',
+    name: "USB-C Cable",
+    type: "Cables",
+    sku: "CABLE-USBC-002",
+    image:
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop",
+    desc: "High-speed USB-C charging and data cable",
     qnt: 50,
-    price: 29.99
+    price: 29.99,
   },
   {
     id: 5,
     name: 'Dell Monitor 27"',
-    type: 'Electronics',
-    sku: 'DELL-MON27-001',
-    image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=200&h=200&fit=crop',
-    desc: '4K monitor with excellent color accuracy',
+    type: "Electronics",
+    sku: "DELL-MON27-001",
+    image:
+      "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=200&h=200&fit=crop",
+    desc: "4K monitor with excellent color accuracy",
     qnt: 8,
-    price: 299.99
+    price: 299.99,
   },
 ];
 
 export default function UpdateQuantity() {
   const [searchParams] = useSearchParams();
-  const itemId = searchParams.get('item');
+  const itemId = searchParams.get("item");
   const [selectedItem, setSelectedItem] = useState<any>(null);
-  const [newQuantity, setNewQuantity] = useState('');
-  const [updateType, setUpdateType] = useState<'set' | 'add' | 'subtract'>('set');
+  const [newQuantity, setNewQuantity] = useState("");
+  const [updateType, setUpdateType] = useState<"set" | "add" | "subtract">(
+    "set",
+  );
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
-  const [error, setError] = useState('');
+  const [error, setError] = useState("");
 
   useEffect(() => {
     if (itemId) {
-      const item = mockInventory.find(item => item.id === parseInt(itemId));
+      const item = mockInventory.find((item) => item.id === parseInt(itemId));
       if (item) {
         setSelectedItem(item);
         setNewQuantity(item.qnt.toString());
@@ -84,24 +91,28 @@ export default function UpdateQuantity() {
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setError('');
-    
+    setError("");
+
     const quantity = parseInt(newQuantity);
     if (isNaN(quantity) || quantity < 0) {
-      setError('Please enter a valid quantity');
+      setError("Please enter a valid quantity");
       return;
     }
 
-    if (updateType === 'subtract' && quantity > selectedItem.qnt) {
-      setError('Cannot subtract more than current quantity');
+    if (updateType === "subtract" && quantity > selectedItem.qnt) {
+      setError("Cannot subtract more than current quantity");
       return;
     }
 
     setIsSubmitting(true);
-    
+
     // Simulate API call
     setTimeout(() => {
-      console.log('Quantity updated:', { item: selectedItem.name, newQuantity, updateType });
+      console.log("Quantity updated:", {
+        item: selectedItem.name,
+        newQuantity,
+        updateType,
+      });
       setIsSubmitting(false);
       setIsSuccess(true);
     }, 1000);
@@ -110,9 +121,9 @@ export default function UpdateQuantity() {
   const calculateNewQuantity = () => {
     const quantity = parseInt(newQuantity) || 0;
     switch (updateType) {
-      case 'add':
+      case "add":
         return selectedItem.qnt + quantity;
-      case 'subtract':
+      case "subtract":
         return Math.max(0, selectedItem.qnt - quantity);
       default:
         return quantity;
@@ -125,9 +136,12 @@ export default function UpdateQuantity() {
         <Card className="w-full max-w-md">
           <CardContent className="text-center py-12">
             <CheckCircle className="h-16 w-16 text-green-600 mx-auto mb-6" />
-            <h2 className="text-2xl font-bold text-gray-900 mb-4">Quantity Updated!</h2>
+            <h2 className="text-2xl font-bold text-gray-900 mb-4">
+              Quantity Updated!
+            </h2>
             <p className="text-gray-600 mb-8">
-              The quantity for "{selectedItem?.name}" has been successfully updated.
+              The quantity for "{selectedItem?.name}" has been successfully
+              updated.
             </p>
             <div className="space-y-3">
               <Button className="w-full" asChild>
@@ -156,7 +170,9 @@ export default function UpdateQuantity() {
               </Link>
             </Button>
             <Edit className="h-6 w-6 text-primary mr-3" />
-            <h1 className="text-xl font-semibold text-gray-900">Update Quantity</h1>
+            <h1 className="text-xl font-semibold text-gray-900">
+              Update Quantity
+            </h1>
           </div>
         </div>
       </header>
@@ -178,7 +194,9 @@ export default function UpdateQuantity() {
                   >
                     <div>
                       <h3 className="font-medium">{item.name}</h3>
-                      <p className="text-gray-600">Current quantity: {item.qnt}</p>
+                      <p className="text-gray-600">
+                        Current quantity: {item.qnt}
+                      </p>
                     </div>
                     <Badge variant="outline">Select</Badge>
                   </div>
@@ -189,10 +207,16 @@ export default function UpdateQuantity() {
         ) : (
           <Card>
             <CardHeader>
-              <CardTitle className="text-2xl text-center">Update Item Quantity</CardTitle>
+              <CardTitle className="text-2xl text-center">
+                Update Item Quantity
+              </CardTitle>
               <div className="text-center">
-                <h3 className="text-lg font-medium text-gray-900">{selectedItem.name}</h3>
-                <p className="text-gray-600">Current quantity: <strong>{selectedItem.qnt}</strong></p>
+                <h3 className="text-lg font-medium text-gray-900">
+                  {selectedItem.name}
+                </h3>
+                <p className="text-gray-600">
+                  Current quantity: <strong>{selectedItem.qnt}</strong>
+                </p>
               </div>
             </CardHeader>
             <CardContent>
@@ -203,24 +227,26 @@ export default function UpdateQuantity() {
                   <div className="grid grid-cols-3 gap-3">
                     <Button
                       type="button"
-                      variant={updateType === 'set' ? 'default' : 'outline'}
-                      onClick={() => setUpdateType('set')}
+                      variant={updateType === "set" ? "default" : "outline"}
+                      onClick={() => setUpdateType("set")}
                       className="h-12"
                     >
                       Set To
                     </Button>
                     <Button
                       type="button"
-                      variant={updateType === 'add' ? 'default' : 'outline'}
-                      onClick={() => setUpdateType('add')}
+                      variant={updateType === "add" ? "default" : "outline"}
+                      onClick={() => setUpdateType("add")}
                       className="h-12"
                     >
                       Add
                     </Button>
                     <Button
                       type="button"
-                      variant={updateType === 'subtract' ? 'default' : 'outline'}
-                      onClick={() => setUpdateType('subtract')}
+                      variant={
+                        updateType === "subtract" ? "default" : "outline"
+                      }
+                      onClick={() => setUpdateType("subtract")}
                       className="h-12"
                     >
                       Subtract
@@ -231,8 +257,11 @@ export default function UpdateQuantity() {
                 {/* Quantity Input */}
                 <div className="space-y-2">
                   <Label htmlFor="quantity" className="text-lg">
-                    {updateType === 'set' ? 'New Quantity' : 
-                     updateType === 'add' ? 'Quantity to Add' : 'Quantity to Subtract'}
+                    {updateType === "set"
+                      ? "New Quantity"
+                      : updateType === "add"
+                        ? "Quantity to Add"
+                        : "Quantity to Subtract"}
                   </Label>
                   <Input
                     id="quantity"
@@ -251,13 +280,20 @@ export default function UpdateQuantity() {
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                     <h4 className="font-medium text-blue-900 mb-2">Preview:</h4>
                     <div className="text-sm text-blue-800">
-                      <p><strong>Current quantity:</strong> {selectedItem.qnt}</p>
-                      <p><strong>Action:</strong> {
-                        updateType === 'set' ? `Set to ${newQuantity}` :
-                        updateType === 'add' ? `Add ${newQuantity}` :
-                        `Subtract ${newQuantity}`
-                      }</p>
-                      <p><strong>New quantity:</strong> {calculateNewQuantity()}</p>
+                      <p>
+                        <strong>Current quantity:</strong> {selectedItem.qnt}
+                      </p>
+                      <p>
+                        <strong>Action:</strong>{" "}
+                        {updateType === "set"
+                          ? `Set to ${newQuantity}`
+                          : updateType === "add"
+                            ? `Add ${newQuantity}`
+                            : `Subtract ${newQuantity}`}
+                      </p>
+                      <p>
+                        <strong>New quantity:</strong> {calculateNewQuantity()}
+                      </p>
                     </div>
                   </div>
                 )}
@@ -287,7 +323,7 @@ export default function UpdateQuantity() {
                     className="flex-1"
                     disabled={isSubmitting || !newQuantity}
                   >
-                    {isSubmitting ? 'Updating...' : 'Update Quantity'}
+                    {isSubmitting ? "Updating..." : "Update Quantity"}
                   </Button>
                 </div>
               </form>
@@ -306,8 +342,8 @@ export default function UpdateQuantity() {
                 <Button
                   variant="outline"
                   onClick={() => {
-                    setUpdateType('add');
-                    setNewQuantity('1');
+                    setUpdateType("add");
+                    setNewQuantity("1");
                   }}
                   disabled={isSubmitting}
                 >
@@ -316,8 +352,8 @@ export default function UpdateQuantity() {
                 <Button
                   variant="outline"
                   onClick={() => {
-                    setUpdateType('subtract');
-                    setNewQuantity('1');
+                    setUpdateType("subtract");
+                    setNewQuantity("1");
                   }}
                   disabled={isSubmitting}
                 >
@@ -326,8 +362,8 @@ export default function UpdateQuantity() {
                 <Button
                   variant="outline"
                   onClick={() => {
-                    setUpdateType('add');
-                    setNewQuantity('10');
+                    setUpdateType("add");
+                    setNewQuantity("10");
                   }}
                   disabled={isSubmitting}
                 >
@@ -336,8 +372,8 @@ export default function UpdateQuantity() {
                 <Button
                   variant="outline"
                   onClick={() => {
-                    setUpdateType('set');
-                    setNewQuantity('0');
+                    setUpdateType("set");
+                    setNewQuantity("0");
                   }}
                   disabled={isSubmitting}
                 >

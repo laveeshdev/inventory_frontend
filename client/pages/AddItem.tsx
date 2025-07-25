@@ -11,39 +11,33 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { 
-  Package, 
-  ArrowLeft,
-  Upload,
-  Save,
-  AlertCircle
-} from "lucide-react";
+import { Package, ArrowLeft, Upload, Save, AlertCircle } from "lucide-react";
 import { Link } from "react-router-dom";
 import { Alert, AlertDescription } from "@/components/ui/alert";
 
 const categories = [
   "Laptops",
-  "Smartphones", 
+  "Smartphones",
   "Tablets",
   "Accessories",
   "Monitors",
   "Audio",
   "Gaming",
   "Storage",
-  "Networking"
+  "Networking",
 ];
 
 const suppliers = [
   "Apple Inc.",
   "Samsung Electronics",
-  "Dell Technologies", 
+  "Dell Technologies",
   "HP Inc.",
   "Lenovo",
   "Logitech",
   "Sony",
   "Microsoft",
   "ASUS",
-  "Other"
+  "Other",
 ];
 
 export default function AddItem() {
@@ -57,22 +51,22 @@ export default function AddItem() {
     price: "",
     supplier: "",
     location: "",
-    notes: ""
+    notes: "",
   });
-  
+
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
   const handleInputChange = (field: string, value: string) => {
-    setFormData(prev => ({ ...prev, [field]: value }));
+    setFormData((prev) => ({ ...prev, [field]: value }));
     if (errors[field]) {
-      setErrors(prev => ({ ...prev, [field]: "" }));
+      setErrors((prev) => ({ ...prev, [field]: "" }));
     }
   };
 
   const validateForm = () => {
     const newErrors: Record<string, string> = {};
-    
+
     if (!formData.name.trim()) newErrors.name = "Item name is required";
     if (!formData.sku.trim()) newErrors.sku = "SKU is required";
     if (!formData.category) newErrors.category = "Category is required";
@@ -86,18 +80,18 @@ export default function AddItem() {
       newErrors.price = "Valid price is required";
     }
     if (!formData.supplier) newErrors.supplier = "Supplier is required";
-    
+
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    
+
     if (!validateForm()) return;
-    
+
     setIsSubmitting(true);
-    
+
     // Simulate API call
     setTimeout(() => {
       console.log("Form submitted:", formData);
@@ -140,7 +134,9 @@ export default function AddItem() {
                     <Input
                       id="name"
                       value={formData.name}
-                      onChange={(e) => handleInputChange("name", e.target.value)}
+                      onChange={(e) =>
+                        handleInputChange("name", e.target.value)
+                      }
                       placeholder="Enter item name"
                       className={errors.name ? "border-red-500" : ""}
                     />
@@ -148,7 +144,7 @@ export default function AddItem() {
                       <p className="text-sm text-red-500">{errors.name}</p>
                     )}
                   </div>
-                  
+
                   <div className="space-y-2">
                     <Label htmlFor="sku">SKU *</Label>
                     <Input
@@ -169,9 +165,13 @@ export default function AddItem() {
                     <Label htmlFor="category">Category *</Label>
                     <Select
                       value={formData.category}
-                      onValueChange={(value) => handleInputChange("category", value)}
+                      onValueChange={(value) =>
+                        handleInputChange("category", value)
+                      }
                     >
-                      <SelectTrigger className={errors.category ? "border-red-500" : ""}>
+                      <SelectTrigger
+                        className={errors.category ? "border-red-500" : ""}
+                      >
                         <SelectValue placeholder="Select category" />
                       </SelectTrigger>
                       <SelectContent>
@@ -191,9 +191,13 @@ export default function AddItem() {
                     <Label htmlFor="supplier">Supplier *</Label>
                     <Select
                       value={formData.supplier}
-                      onValueChange={(value) => handleInputChange("supplier", value)}
+                      onValueChange={(value) =>
+                        handleInputChange("supplier", value)
+                      }
                     >
-                      <SelectTrigger className={errors.supplier ? "border-red-500" : ""}>
+                      <SelectTrigger
+                        className={errors.supplier ? "border-red-500" : ""}
+                      >
                         <SelectValue placeholder="Select supplier" />
                       </SelectTrigger>
                       <SelectContent>
@@ -215,7 +219,9 @@ export default function AddItem() {
                   <Textarea
                     id="description"
                     value={formData.description}
-                    onChange={(e) => handleInputChange("description", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("description", e.target.value)
+                    }
                     placeholder="Enter item description"
                     rows={3}
                   />
@@ -238,7 +244,9 @@ export default function AddItem() {
                     type="number"
                     min="0"
                     value={formData.quantity}
-                    onChange={(e) => handleInputChange("quantity", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("quantity", e.target.value)
+                    }
                     placeholder="0"
                     className={errors.quantity ? "border-red-500" : ""}
                   />
@@ -254,7 +262,9 @@ export default function AddItem() {
                     type="number"
                     min="0"
                     value={formData.minStock}
-                    onChange={(e) => handleInputChange("minStock", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("minStock", e.target.value)
+                    }
                     placeholder="0"
                     className={errors.minStock ? "border-red-500" : ""}
                   />
@@ -285,7 +295,9 @@ export default function AddItem() {
                   <Input
                     id="location"
                     value={formData.location}
-                    onChange={(e) => handleInputChange("location", e.target.value)}
+                    onChange={(e) =>
+                      handleInputChange("location", e.target.value)
+                    }
                     placeholder="e.g., Warehouse A, Shelf 3"
                   />
                 </div>

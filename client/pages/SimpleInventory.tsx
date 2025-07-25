@@ -1,69 +1,74 @@
-import { useState } from 'react';
-import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Button } from '@/components/ui/button';
-import { Input } from '@/components/ui/input';
-import { ArrowLeft, Search, Package } from 'lucide-react';
-import { Link } from 'react-router-dom';
+import { useState } from "react";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ArrowLeft, Search, Package } from "lucide-react";
+import { Link } from "react-router-dom";
 
 // Mock data for simple inventory
 const mockInventory = [
   {
     id: 1,
     name: 'MacBook Pro 16"',
-    type: 'Electronics',
-    sku: 'APPLE-MBP16-001',
-    image: 'https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=200&h=200&fit=crop',
-    desc: 'High-performance laptop with M3 chip',
+    type: "Electronics",
+    sku: "APPLE-MBP16-001",
+    image:
+      "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=200&h=200&fit=crop",
+    desc: "High-performance laptop with M3 chip",
     qnt: 5,
-    price: 2499.99
+    price: 2499.99,
   },
   {
     id: 2,
-    name: 'iPhone 15 Pro',
-    type: 'Electronics',
-    sku: 'APPLE-IP15-PRO',
-    image: 'https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=200&h=200&fit=crop',
-    desc: 'Latest iPhone with Pro camera system',
+    name: "iPhone 15 Pro",
+    type: "Electronics",
+    sku: "APPLE-IP15-PRO",
+    image:
+      "https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=200&h=200&fit=crop",
+    desc: "Latest iPhone with Pro camera system",
     qnt: 12,
-    price: 999.99
+    price: 999.99,
   },
   {
     id: 3,
-    name: 'Wireless Mouse',
-    type: 'Accessories',
-    sku: 'LOGI-WM-001',
-    image: 'https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=200&h=200&fit=crop',
-    desc: 'Ergonomic wireless mouse with precision tracking',
+    name: "Wireless Mouse",
+    type: "Accessories",
+    sku: "LOGI-WM-001",
+    image:
+      "https://images.unsplash.com/photo-1527864550417-7fd91fc51a46?w=200&h=200&fit=crop",
+    desc: "Ergonomic wireless mouse with precision tracking",
     qnt: 25,
-    price: 79.99
+    price: 79.99,
   },
   {
     id: 4,
-    name: 'USB-C Cable',
-    type: 'Cables',
-    sku: 'CABLE-USBC-002',
-    image: 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop',
-    desc: 'High-speed USB-C charging and data cable',
+    name: "USB-C Cable",
+    type: "Cables",
+    sku: "CABLE-USBC-002",
+    image:
+      "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=200&h=200&fit=crop",
+    desc: "High-speed USB-C charging and data cable",
     qnt: 50,
-    price: 29.99
+    price: 29.99,
   },
   {
     id: 5,
     name: 'Dell Monitor 27"',
-    type: 'Electronics',
-    sku: 'DELL-MON27-001',
-    image: 'https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=200&h=200&fit=crop',
-    desc: '4K monitor with excellent color accuracy',
+    type: "Electronics",
+    sku: "DELL-MON27-001",
+    image:
+      "https://images.unsplash.com/photo-1527443224154-c4a3942d3acf?w=200&h=200&fit=crop",
+    desc: "4K monitor with excellent color accuracy",
     qnt: 8,
-    price: 299.99
+    price: 299.99,
   },
 ];
 
 export default function SimpleInventory() {
-  const [searchTerm, setSearchTerm] = useState('');
-  
-  const filteredItems = mockInventory.filter(item =>
-    item.name.toLowerCase().includes(searchTerm.toLowerCase())
+  const [searchTerm, setSearchTerm] = useState("");
+
+  const filteredItems = mockInventory.filter((item) =>
+    item.name.toLowerCase().includes(searchTerm.toLowerCase()),
   );
 
   return (
@@ -79,7 +84,9 @@ export default function SimpleInventory() {
               </Link>
             </Button>
             <Package className="h-6 w-6 text-primary mr-3" />
-            <h1 className="text-xl font-semibold text-gray-900">Your Inventory</h1>
+            <h1 className="text-xl font-semibold text-gray-900">
+              Your Inventory
+            </h1>
           </div>
         </div>
       </header>
@@ -108,13 +115,12 @@ export default function SimpleInventory() {
               <CardContent className="text-center py-12">
                 <Package className="h-16 w-16 text-gray-400 mx-auto mb-4" />
                 <h3 className="text-xl font-medium text-gray-900 mb-2">
-                  {searchTerm ? 'No items found' : 'No items in inventory'}
+                  {searchTerm ? "No items found" : "No items in inventory"}
                 </h3>
                 <p className="text-gray-600 mb-6">
-                  {searchTerm 
-                    ? 'Try searching with different terms' 
-                    : 'Start by adding your first item to the inventory'
-                  }
+                  {searchTerm
+                    ? "Try searching with different terms"
+                    : "Start by adding your first item to the inventory"}
                 </p>
                 <Button asChild>
                   <Link to="/add-item">Add Your First Item</Link>
@@ -134,7 +140,8 @@ export default function SimpleInventory() {
                         className="w-20 h-20 object-cover rounded-lg border"
                         onError={(e) => {
                           const target = e.target as HTMLImageElement;
-                          target.src = 'https://images.unsplash.com/photo-1580169980114-ccd0babfa840?w=200&h=200&fit=crop';
+                          target.src =
+                            "https://images.unsplash.com/photo-1580169980114-ccd0babfa840?w=200&h=200&fit=crop";
                         }}
                       />
                     </div>
@@ -147,8 +154,12 @@ export default function SimpleInventory() {
                             {item.name}
                           </h3>
                           <div className="flex items-center gap-4 text-sm text-gray-600 mt-1">
-                            <span><strong>Type:</strong> {item.type}</span>
-                            <span><strong>SKU:</strong> {item.sku}</span>
+                            <span>
+                              <strong>Type:</strong> {item.type}
+                            </span>
+                            <span>
+                              <strong>SKU:</strong> {item.sku}
+                            </span>
                           </div>
                         </div>
                         <Button variant="outline" asChild>
@@ -159,7 +170,9 @@ export default function SimpleInventory() {
                       </div>
 
                       {item.desc && (
-                        <p className="text-gray-600 text-sm mb-3">{item.desc}</p>
+                        <p className="text-gray-600 text-sm mb-3">
+                          {item.desc}
+                        </p>
                       )}
 
                       <div className="grid grid-cols-3 gap-4 text-center bg-gray-50 rounded-lg p-3">
@@ -168,14 +181,18 @@ export default function SimpleInventory() {
                           <div className="text-sm text-gray-600">Quantity</div>
                         </div>
                         <div>
-                          <div className="font-medium text-lg">${item.price}</div>
+                          <div className="font-medium text-lg">
+                            ${item.price}
+                          </div>
                           <div className="text-sm text-gray-600">Price</div>
                         </div>
                         <div>
                           <div className="font-medium text-lg text-green-600">
                             ${(item.qnt * item.price).toFixed(2)}
                           </div>
-                          <div className="text-sm text-gray-600">Total Value</div>
+                          <div className="text-sm text-gray-600">
+                            Total Value
+                          </div>
                         </div>
                       </div>
                     </div>
@@ -208,7 +225,10 @@ export default function SimpleInventory() {
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-primary">
-                    ${filteredItems.reduce((sum, item) => sum + (item.qnt * item.price), 0).toFixed(2)}
+                    $
+                    {filteredItems
+                      .reduce((sum, item) => sum + item.qnt * item.price, 0)
+                      .toFixed(2)}
                   </div>
                   <div className="text-gray-600">Total Value</div>
                 </div>

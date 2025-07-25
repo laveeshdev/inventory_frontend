@@ -18,7 +18,7 @@ const queryClient = new QueryClient();
 // Protected Route Component
 function ProtectedRoute({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
-  
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -29,18 +29,18 @@ function ProtectedRoute({ children }: { children: React.ReactNode }) {
       </div>
     );
   }
-  
+
   if (!user) {
     return <Navigate to="/auth" replace />;
   }
-  
+
   return <>{children}</>;
 }
 
 // Public Route Component (redirects to home if already logged in)
 function PublicRoute({ children }: { children: React.ReactNode }) {
   const { user, isLoading } = useAuth();
-  
+
   if (isLoading) {
     return (
       <div className="min-h-screen bg-gray-50 flex items-center justify-center">
@@ -51,11 +51,11 @@ function PublicRoute({ children }: { children: React.ReactNode }) {
       </div>
     );
   }
-  
+
   if (user) {
     return <Navigate to="/" replace />;
   }
-  
+
   return <>{children}</>;
 }
 
@@ -63,37 +63,52 @@ function AppRoutes() {
   return (
     <Routes>
       {/* Public Routes */}
-      <Route path="/auth" element={
-        <PublicRoute>
-          <Auth />
-        </PublicRoute>
-      } />
-      
+      <Route
+        path="/auth"
+        element={
+          <PublicRoute>
+            <Auth />
+          </PublicRoute>
+        }
+      />
+
       {/* Protected Routes */}
-      <Route path="/" element={
-        <ProtectedRoute>
-          <Home />
-        </ProtectedRoute>
-      } />
-      
-      <Route path="/inventory" element={
-        <ProtectedRoute>
-          <SimpleInventory />
-        </ProtectedRoute>
-      } />
-      
-      <Route path="/add-item" element={
-        <ProtectedRoute>
-          <SimpleAddItem />
-        </ProtectedRoute>
-      } />
-      
-      <Route path="/update-quantity" element={
-        <ProtectedRoute>
-          <UpdateQuantity />
-        </ProtectedRoute>
-      } />
-      
+      <Route
+        path="/"
+        element={
+          <ProtectedRoute>
+            <Home />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/inventory"
+        element={
+          <ProtectedRoute>
+            <SimpleInventory />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/add-item"
+        element={
+          <ProtectedRoute>
+            <SimpleAddItem />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/update-quantity"
+        element={
+          <ProtectedRoute>
+            <UpdateQuantity />
+          </ProtectedRoute>
+        }
+      />
+
       {/* Catch all route - redirect to auth if not logged in, home if logged in */}
       <Route path="*" element={<Navigate to="/" replace />} />
     </Routes>

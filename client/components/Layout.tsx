@@ -1,15 +1,15 @@
 import { Link, useLocation } from "react-router-dom";
 import { cn } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
-import { 
-  Package, 
-  BarChart3, 
-  Plus, 
-  Settings, 
+import {
+  Package,
+  BarChart3,
+  Plus,
+  Settings,
   Menu,
   Search,
   Bell,
-  User
+  User,
 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { useState } from "react";
@@ -46,7 +46,9 @@ export function Layout({ children }: LayoutProps) {
             </Button>
             <Link to="/" className="flex items-center gap-2">
               <Package className="h-8 w-8 text-primary" />
-              <span className="font-bold text-xl text-gray-900">InventoryPro</span>
+              <span className="font-bold text-xl text-gray-900">
+                InventoryPro
+              </span>
             </Link>
           </div>
 
@@ -65,7 +67,9 @@ export function Layout({ children }: LayoutProps) {
           <div className="flex items-center gap-3">
             <Button variant="ghost" size="sm" className="relative">
               <Bell className="h-5 w-5" />
-              <span className="absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">3</span>
+              <span className="absolute -top-1 -right-1 h-4 w-4 bg-red-500 text-white text-xs rounded-full flex items-center justify-center">
+                3
+              </span>
             </Button>
             <Button variant="ghost" size="sm">
               <User className="h-5 w-5" />
@@ -76,15 +80,19 @@ export function Layout({ children }: LayoutProps) {
 
       <div className="flex">
         {/* Sidebar */}
-        <aside className={cn(
-          "bg-white border-r border-gray-200 w-64 fixed lg:static h-screen lg:h-auto z-40 transform transition-transform duration-200 ease-in-out",
-          isMobileMenuOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"
-        )}>
+        <aside
+          className={cn(
+            "bg-white border-r border-gray-200 w-64 fixed lg:static h-screen lg:h-auto z-40 transform transition-transform duration-200 ease-in-out",
+            isMobileMenuOpen
+              ? "translate-x-0"
+              : "-translate-x-full lg:translate-x-0",
+          )}
+        >
           <nav className="p-4 space-y-2">
             {navItems.map((item) => {
               const Icon = item.icon;
               const isActive = location.pathname === item.path;
-              
+
               return (
                 <Link
                   key={item.path}
@@ -93,7 +101,7 @@ export function Layout({ children }: LayoutProps) {
                     "flex items-center gap-3 px-3 py-2 rounded-lg text-sm font-medium transition-colors",
                     isActive
                       ? "bg-primary text-primary-foreground"
-                      : "text-gray-700 hover:bg-gray-100"
+                      : "text-gray-700 hover:bg-gray-100",
                   )}
                   onClick={() => setIsMobileMenuOpen(false)}
                 >
@@ -107,9 +115,7 @@ export function Layout({ children }: LayoutProps) {
 
         {/* Main content */}
         <main className="flex-1 lg:ml-0">
-          <div className="p-4 lg:p-6">
-            {children}
-          </div>
+          <div className="p-4 lg:p-6">{children}</div>
         </main>
       </div>
 

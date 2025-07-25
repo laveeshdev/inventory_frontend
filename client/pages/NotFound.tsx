@@ -20,7 +20,9 @@ const NotFound = () => {
         <CardContent className="text-center p-8">
           <Package className="h-16 w-16 text-gray-400 mx-auto mb-6" />
           <h1 className="text-4xl font-bold text-gray-900 mb-2">404</h1>
-          <h2 className="text-xl font-semibold text-gray-700 mb-4">Page Not Found</h2>
+          <h2 className="text-xl font-semibold text-gray-700 mb-4">
+            Page Not Found
+          </h2>
           <p className="text-gray-600 mb-6">
             The page you're looking for doesn't exist in the inventory system.
           </p>
@@ -39,7 +41,8 @@ const NotFound = () => {
             </Button>
           </div>
           <p className="text-sm text-gray-500 mt-6">
-            Need help? Continue prompting to add more pages to the inventory system.
+            Need help? Continue prompting to add more pages to the inventory
+            system.
           </p>
         </CardContent>
       </Card>

@@ -3,7 +3,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { 
+import {
   Table,
   TableBody,
   TableCell,
@@ -18,15 +18,15 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
-import { 
-  Search, 
-  Filter, 
-  Download, 
+import {
+  Search,
+  Filter,
+  Download,
   Plus,
   Edit,
   Trash2,
   Package,
-  AlertTriangle
+  AlertTriangle,
 } from "lucide-react";
 import { Link } from "react-router-dom";
 
@@ -34,7 +34,7 @@ import { Link } from "react-router-dom";
 const inventoryItems = [
   {
     id: "INV-001",
-    name: "MacBook Pro 16\" M3",
+    name: 'MacBook Pro 16" M3',
     category: "Laptops",
     sku: "APPLE-MBP16-M3",
     quantity: 45,
@@ -42,10 +42,10 @@ const inventoryItems = [
     price: 2499.99,
     supplier: "Apple Inc.",
     status: "In Stock",
-    lastUpdated: "2024-01-15"
+    lastUpdated: "2024-01-15",
   },
   {
-    id: "INV-002", 
+    id: "INV-002",
     name: "iPhone 15 Pro",
     category: "Smartphones",
     sku: "APPLE-IP15-PRO",
@@ -54,19 +54,19 @@ const inventoryItems = [
     price: 999.99,
     supplier: "Apple Inc.",
     status: "Low Stock",
-    lastUpdated: "2024-01-14"
+    lastUpdated: "2024-01-14",
   },
   {
     id: "INV-003",
     name: "Dell XPS 13",
-    category: "Laptops", 
+    category: "Laptops",
     sku: "DELL-XPS13-2024",
     quantity: 22,
     minStock: 5,
     price: 1299.99,
     supplier: "Dell Technologies",
     status: "In Stock",
-    lastUpdated: "2024-01-13"
+    lastUpdated: "2024-01-13",
   },
   {
     id: "INV-004",
@@ -77,8 +77,8 @@ const inventoryItems = [
     minStock: 15,
     price: 99.99,
     supplier: "Logitech",
-    status: "Low Stock", 
-    lastUpdated: "2024-01-12"
+    status: "Low Stock",
+    lastUpdated: "2024-01-12",
   },
   {
     id: "INV-005",
@@ -90,11 +90,17 @@ const inventoryItems = [
     price: 1199.99,
     supplier: "Samsung Electronics",
     status: "In Stock",
-    lastUpdated: "2024-01-11"
-  }
+    lastUpdated: "2024-01-11",
+  },
 ];
 
-const categories = ["All Categories", "Laptops", "Smartphones", "Accessories", "Tablets"];
+const categories = [
+  "All Categories",
+  "Laptops",
+  "Smartphones",
+  "Accessories",
+  "Tablets",
+];
 const statusOptions = ["All Status", "In Stock", "Low Stock", "Out of Stock"];
 
 export default function Inventory() {
@@ -102,23 +108,39 @@ export default function Inventory() {
   const [selectedCategory, setSelectedCategory] = useState("All Categories");
   const [selectedStatus, setSelectedStatus] = useState("All Status");
 
-  const filteredItems = inventoryItems.filter(item => {
-    const matchesSearch = item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         item.sku.toLowerCase().includes(searchTerm.toLowerCase()) ||
-                         item.supplier.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = selectedCategory === "All Categories" || item.category === selectedCategory;
-    const matchesStatus = selectedStatus === "All Status" || item.status === selectedStatus;
-    
+  const filteredItems = inventoryItems.filter((item) => {
+    const matchesSearch =
+      item.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.sku.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      item.supplier.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      selectedCategory === "All Categories" ||
+      item.category === selectedCategory;
+    const matchesStatus =
+      selectedStatus === "All Status" || item.status === selectedStatus;
+
     return matchesSearch && matchesCategory && matchesStatus;
   });
 
-  const getStatusBadge = (status: string, quantity: number, minStock: number) => {
+  const getStatusBadge = (
+    status: string,
+    quantity: number,
+    minStock: number,
+  ) => {
     if (quantity === 0) {
       return <Badge variant="destructive">Out of Stock</Badge>;
     } else if (quantity <= minStock) {
-      return <Badge variant="secondary" className="bg-orange-100 text-orange-800">Low Stock</Badge>;
+      return (
+        <Badge variant="secondary" className="bg-orange-100 text-orange-800">
+          Low Stock
+        </Badge>
+      );
     } else {
-      return <Badge variant="default" className="bg-green-100 text-green-800">In Stock</Badge>;
+      return (
+        <Badge variant="default" className="bg-green-100 text-green-800">
+          In Stock
+        </Badge>
+      );
     }
   };
 
@@ -127,8 +149,12 @@ export default function Inventory() {
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>
-          <h1 className="text-3xl font-bold text-gray-900">Inventory Management</h1>
-          <p className="text-gray-600 mt-1">Manage and track your inventory items</p>
+          <h1 className="text-3xl font-bold text-gray-900">
+            Inventory Management
+          </h1>
+          <p className="text-gray-600 mt-1">
+            Manage and track your inventory items
+          </p>
         </div>
         <div className="flex gap-3">
           <Button variant="outline">
@@ -163,7 +189,10 @@ export default function Inventory() {
                 className="pl-10"
               />
             </div>
-            <Select value={selectedCategory} onValueChange={setSelectedCategory}>
+            <Select
+              value={selectedCategory}
+              onValueChange={setSelectedCategory}
+            >
               <SelectTrigger>
                 <SelectValue placeholder="Category" />
               </SelectTrigger>
@@ -187,11 +216,14 @@ export default function Inventory() {
                 ))}
               </SelectContent>
             </Select>
-            <Button variant="outline" onClick={() => {
-              setSearchTerm("");
-              setSelectedCategory("All Categories");
-              setSelectedStatus("All Status");
-            }}>
+            <Button
+              variant="outline"
+              onClick={() => {
+                setSearchTerm("");
+                setSelectedCategory("All Categories");
+                setSelectedStatus("All Status");
+              }}
+            >
               Clear Filters
             </Button>
           </div>
@@ -230,7 +262,9 @@ export default function Inventory() {
                         <p className="text-sm text-gray-500">{item.id}</p>
                       </div>
                     </TableCell>
-                    <TableCell className="font-mono text-sm">{item.sku}</TableCell>
+                    <TableCell className="font-mono text-sm">
+                      {item.sku}
+                    </TableCell>
                     <TableCell>{item.category}</TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">
@@ -239,12 +273,18 @@ export default function Inventory() {
                           <AlertTriangle className="h-4 w-4 text-orange-500" />
                         )}
                       </div>
-                      <p className="text-xs text-gray-500">Min: {item.minStock}</p>
+                      <p className="text-xs text-gray-500">
+                        Min: {item.minStock}
+                      </p>
                     </TableCell>
                     <TableCell>${item.price.toLocaleString()}</TableCell>
                     <TableCell>{item.supplier}</TableCell>
                     <TableCell>
-                      {getStatusBadge(item.status, item.quantity, item.minStock)}
+                      {getStatusBadge(
+                        item.status,
+                        item.quantity,
+                        item.minStock,
+                      )}
                     </TableCell>
                     <TableCell>
                       <div className="flex items-center gap-2">
@@ -261,11 +301,13 @@ export default function Inventory() {
               </TableBody>
             </Table>
           </div>
-          
+
           {filteredItems.length === 0 && (
             <div className="text-center py-8">
               <Package className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-              <p className="text-gray-500">No items found matching your criteria</p>
+              <p className="text-gray-500">
+                No items found matching your criteria
+              </p>
             </div>
           )}
         </CardContent>

@@ -202,13 +202,13 @@ export default function SimpleInventory() {
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-primary">
-                    {filteredItems.reduce((sum, item) => sum + item.quantity, 0)}
+                    {filteredItems.reduce((sum, item) => sum + item.qnt, 0)}
                   </div>
                   <div className="text-gray-600">Total Quantity</div>
                 </div>
                 <div>
                   <div className="text-2xl font-bold text-primary">
-                    ${filteredItems.reduce((sum, item) => sum + (item.quantity * item.price), 0).toFixed(2)}
+                    ${filteredItems.reduce((sum, item) => sum + (item.qnt * item.price), 0).toFixed(2)}
                   </div>
                   <div className="text-gray-600">Total Value</div>
                 </div>

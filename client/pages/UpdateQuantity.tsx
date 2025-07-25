@@ -251,7 +251,7 @@ export default function UpdateQuantity() {
                   <div className="bg-blue-50 border border-blue-200 rounded-lg p-4">
                     <h4 className="font-medium text-blue-900 mb-2">Preview:</h4>
                     <div className="text-sm text-blue-800">
-                      <p><strong>Current quantity:</strong> {selectedItem.quantity}</p>
+                      <p><strong>Current quantity:</strong> {selectedItem.qnt}</p>
                       <p><strong>Action:</strong> {
                         updateType === 'set' ? `Set to ${newQuantity}` :
                         updateType === 'add' ? `Add ${newQuantity}` :

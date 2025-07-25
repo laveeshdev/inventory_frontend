@@ -7,6 +7,7 @@ interface FileUploadProps {
   onFileSelect: (file: File | null) => void;
   currentImage?: string;
   className?: string;
+  compact?: boolean;
 }
 
 export function FileUpload({ onFileSelect, currentImage, className }: FileUploadProps) {

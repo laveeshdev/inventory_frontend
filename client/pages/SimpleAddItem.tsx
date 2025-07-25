@@ -248,6 +248,16 @@ export default function SimpleAddItem() {
                 />
               </div>
 
+              {/* Image Upload */}
+              <div className="space-y-2">
+                <Label className="text-base font-medium">Item Image</Label>
+                <FileUpload
+                  onFileSelect={handleFileSelect}
+                  currentImage={formData.image}
+                  compact={true}
+                />
+              </div>
+
 
 
               {/* Error Display */}

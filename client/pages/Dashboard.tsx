@@ -54,13 +54,6 @@ const recentActivity = [
   { id: 4, action: "Added", item: "Dell Monitor 27\"", qty: 8, time: "1 day ago" },
 ];
 
-const lowStockItems = [
-  { id: 1, name: "Wireless Mouse", current: 5, minimum: 20, category: "Accessories" },
-  { id: 2, name: "USB-C Cable", current: 12, minimum: 50, category: "Cables" },
-  { id: 3, name: "Laptop Stand", current: 3, minimum: 15, category: "Accessories" },
-  { id: 4, name: "Webcam HD", current: 8, minimum: 25, category: "Electronics" },
-];
-
 export default function Dashboard() {
   return (
     <div className="space-y-6">
@@ -111,72 +104,39 @@ export default function Dashboard() {
         })}
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-        {/* Recent Activity */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <TrendingUp className="h-5 w-5" />
-              Recent Activity
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {recentActivity.map((activity) => (
-                <div key={activity.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                  <div className="flex items-center gap-3">
-                    <Badge 
-                      variant={activity.action === "Added" ? "default" : 
-                              activity.action === "Updated" ? "secondary" : "destructive"}
-                    >
-                      {activity.action}
-                    </Badge>
-                    <div>
-                      <p className="font-medium text-gray-900">{activity.item}</p>
-                      <p className="text-sm text-gray-500">Quantity: {activity.qty}</p>
-                    </div>
-                  </div>
-                  <span className="text-sm text-gray-500">{activity.time}</span>
-                </div>
-              ))}
-            </div>
-            <Button variant="outline" className="w-full mt-4" asChild>
-              <Link to="/inventory">View All Activity</Link>
-            </Button>
-          </CardContent>
-        </Card>
-
-        {/* Low Stock Alert */}
-        <Card>
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <AlertTriangle className="h-5 w-5 text-orange-600" />
-              Low Stock Alert
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {lowStockItems.map((item) => (
-                <div key={item.id} className="flex items-center justify-between p-3 bg-orange-50 border border-orange-200 rounded-lg">
+      {/* Recent Activity */}
+      <Card>
+        <CardHeader>
+          <CardTitle className="flex items-center gap-2">
+            <TrendingUp className="h-5 w-5" />
+            Recent Activity
+          </CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="space-y-4">
+            {recentActivity.map((activity) => (
+              <div key={activity.id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
+                <div className="flex items-center gap-3">
+                  <Badge
+                    variant={activity.action === "Added" ? "default" :
+                            activity.action === "Updated" ? "secondary" : "destructive"}
+                  >
+                    {activity.action}
+                  </Badge>
                   <div>
-                    <p className="font-medium text-gray-900">{item.name}</p>
-                    <p className="text-sm text-gray-500">{item.category}</p>
-                  </div>
-                  <div className="text-right">
-                    <p className="text-sm font-medium text-orange-700">
-                      {item.current} / {item.minimum}
-                    </p>
-                    <p className="text-xs text-gray-500">Current / Minimum</p>
+                    <p className="font-medium text-gray-900">{activity.item}</p>
+                    <p className="text-sm text-gray-500">Quantity: {activity.qty}</p>
                   </div>
                 </div>
-              ))}
-            </div>
-            <Button variant="outline" className="w-full mt-4" asChild>
-              <Link to="/inventory">Restock Items</Link>
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
+                <span className="text-sm text-gray-500">{activity.time}</span>
+              </div>
+            ))}
+          </div>
+          <Button variant="outline" className="w-full mt-4" asChild>
+            <Link to="/inventory">View All Activity</Link>
+          </Button>
+        </CardContent>
+      </Card>
     </div>
   );
 }

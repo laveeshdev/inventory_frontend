@@ -10,7 +10,7 @@ interface FileUploadProps {
   compact?: boolean;
 }
 
-export function FileUpload({ onFileSelect, currentImage, className }: FileUploadProps) {
+export function FileUpload({ onFileSelect, currentImage, className, compact = false }: FileUploadProps) {
   const [isDragging, setIsDragging] = useState(false);
   const [preview, setPreview] = useState<string | null>(currentImage || null);
   const [error, setError] = useState<string>('');

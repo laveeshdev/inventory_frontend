@@ -192,7 +192,7 @@ export default function UpdateQuantity() {
               <CardTitle className="text-2xl text-center">Update Item Quantity</CardTitle>
               <div className="text-center">
                 <h3 className="text-lg font-medium text-gray-900">{selectedItem.name}</h3>
-                <p className="text-gray-600">Current quantity: <strong>{selectedItem.quantity}</strong></p>
+                <p className="text-gray-600">Current quantity: <strong>{selectedItem.qnt}</strong></p>
               </div>
             </CardHeader>
             <CardContent>

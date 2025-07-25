@@ -86,9 +86,10 @@ export function FileUpload({ onFileSelect, currentImage, className, compact = fa
       {!preview ? (
         <div
           className={cn(
-            "border-2 border-dashed rounded-lg p-6 text-center cursor-pointer transition-colors",
-            isDragging 
-              ? "border-primary bg-primary/5" 
+            "border-2 border-dashed rounded-lg text-center cursor-pointer transition-colors",
+            compact ? "p-4" : "p-6",
+            isDragging
+              ? "border-primary bg-primary/5"
               : "border-gray-300 hover:border-gray-400",
             error && "border-red-300 bg-red-50"
           )}
@@ -104,23 +105,39 @@ export function FileUpload({ onFileSelect, currentImage, className, compact = fa
             onChange={handleFileInput}
             className="hidden"
           />
-          
-          <div className="flex flex-col items-center">
-            <Upload className="h-12 w-12 text-gray-400 mb-4" />
-            <h4 className="text-lg font-medium text-gray-900 mb-2">
-              Upload Image
-            </h4>
-            <p className="text-sm text-gray-600 mb-4">
-              Drag and drop your image here, or click to browse
-            </p>
-            <Button type="button" variant="outline">
-              Choose File
-            </Button>
-          </div>
-          
-          <p className="text-xs text-gray-500 mt-4">
-            PNG, JPG, GIF up to 5MB
-          </p>
+
+          {compact ? (
+            <div className="flex items-center justify-center gap-4">
+              <Upload className="h-6 w-6 text-gray-400" />
+              <div className="text-left">
+                <p className="text-sm font-medium text-gray-900">
+                  Upload Image
+                </p>
+                <p className="text-xs text-gray-500">
+                  PNG, JPG, GIF up to 5MB
+                </p>
+              </div>
+              <Button type="button" variant="outline" size="sm">
+                Choose File
+              </Button>
+            </div>
+          ) : (
+            <div className="flex flex-col items-center">
+              <Upload className="h-12 w-12 text-gray-400 mb-4" />
+              <h4 className="text-lg font-medium text-gray-900 mb-2">
+                Upload Image
+              </h4>
+              <p className="text-sm text-gray-600 mb-4">
+                Drag and drop your image here, or click to browse
+              </p>
+              <Button type="button" variant="outline">
+                Choose File
+              </Button>
+              <p className="text-xs text-gray-500 mt-4">
+                PNG, JPG, GIF up to 5MB
+              </p>
+            </div>
+          )}
         </div>
       ) : (
         <div className="border border-gray-200 rounded-lg p-4 bg-white">

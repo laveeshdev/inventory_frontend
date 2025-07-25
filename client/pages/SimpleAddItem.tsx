@@ -197,15 +197,6 @@ export default function SimpleAddItem() {
                   )}
                 </div>
 
-                {/* File Upload */}
-                <div className="md:col-span-2 space-y-2">
-                  <Label className="text-base font-medium">Item Image</Label>
-                  <FileUpload
-                    onFileSelect={handleFileSelect}
-                    currentImage={formData.image}
-                  />
-                </div>
-
                 {/* Quantity */}
                 <div className="space-y-2">
                   <Label htmlFor="qnt" className="text-base font-medium">Quantity *</Label>

@@ -19,6 +19,7 @@ export default function SimpleAddItem() {
     qnt: '',
     price: ''
   });
+  const [selectedFile, setSelectedFile] = useState<File | null>(null);
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isSuccess, setIsSuccess] = useState(false);
